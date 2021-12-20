@@ -22,7 +22,7 @@ const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
                         <Col lg="5">
                             <div style={{ width: 400 }}>
                                 <Card.Img
-                                    className="imageStyle"
+                                    style={{ height: 400, width: 400, objectFit: 'cover' }}
                                     src={'https://static.wikia.nocookie.net/8daae125-c4d1-42cc-a739-1a37017c2970'}></Card.Img>
                             </div>
                         </Col>
@@ -260,9 +260,36 @@ const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
                             </Col>
                         </Row>
                     </Card.Text>
-                    <Card.Text>
-                        asd
-                    </Card.Text>
+                    {testCheckBox.map((item) => (<Card.Text style={descStyle} className="text-muted">
+                        <Row >
+                            <hr style={hrStyle} />
+                            <Col lg="1" style={{ paddingLeft: 30, paddingTop: 5 }}>
+                                <label >
+                                    <Image
+                                        roundedCircle
+                                        style={{ width: 60, height: 60, objectFit: 'cover' }}
+                                        src={'https://static.wikia.nocookie.net/8daae125-c4d1-42cc-a739-1a37017c2970'}></ Image>
+
+                                </label>
+                            </Col>
+                            <Col style={{ color: 'black', marginLeft: 10, paddingTop: 2, marginBottom: 10 }}>
+                                <div style={{}}>
+                                    <label style={{ fontSize: 18 }}>ร้านนารูโตะ
+                                    </label>
+                                </div>
+                                <div style={{ color: 'rgb(238,77,45)' }}>
+                                    <AiFillStar /> <AiFillStar /> <AiFillStar /> <AiFillStar />
+                                </div>
+                                <div>
+                                    <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also </label>
+                                </div>
+
+                            </Col>
+
+                        </Row>
+                    </Card.Text >
+                    ))}
+
                 </Card.Body>
             </Card>
 

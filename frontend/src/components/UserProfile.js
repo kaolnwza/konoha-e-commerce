@@ -34,8 +34,22 @@ const UserProfile = () => {
 
                         <Col>
                             <Card style={cardStyle_inside_right}>
-                                <Card.Header style={userHeader}>User Profile</Card.Header>
+
                                 <Card.Body>
+                                    <Row>
+                                        <Col style={{ paddingLeft: 30 }}>
+                                            <Button variant={'outline-secondary'} style={buttonTypeStyle}>ทั้งหมด</Button>
+                                            <Button variant={'outline-secondary'} style={buttonTypeStyle}>ที่ต้องชำระ</Button>
+                                            <Button variant={'outline-secondary'} style={buttonTypeStyle}>ที่ต้องจัดส่ง</Button>
+                                            <Button variant={'outline-secondary'} style={buttonTypeStyle}>ที่ต้องได้รับ</Button>
+                                            <Button variant={'outline-secondary'} style={buttonTypeStyle}>สำเร็จแล้ว</Button>
+                                            <Button variant={'outline-secondary'} style={buttonTypeStyle}>ยกเลิกแล้ว</Button>
+                                        </Col>
+
+                                    </Row>
+                                    <Col>
+                                        <hr style={hrStyle} />
+                                    </Col>
                                     <Row>
                                         <Col md={4}>
                                             <span style={spanStyleLeft}>detail #1</span>
@@ -71,6 +85,10 @@ const UserProfile = () => {
             </Card >
         </>
     )
+}
+
+const buttonTypeStyle = {
+    marginRight: 20
 }
 
 const cardStyle = {
