@@ -94,7 +94,8 @@ const buttonTypeStyle = {
 const cardStyle = {
     width: '100%',
     height: 600,
-    marginTop: 40
+    marginTop: 40,
+    backgroundColor: '#FAFAFA'
 }
 
 const imageStyle = {

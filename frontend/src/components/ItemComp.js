@@ -1,12 +1,14 @@
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Row, Col } from 'react-bootstrap'
 import '../App.css'
+import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
 const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
     return (
-        <div >
+        <div className="itemHover">
 
             <Card
                 className="justify-content-md-center"
-                style={{ width: 260, marginBottom: 20 }}>
+                style={{ width: 260, marginBottom: 20 }}
+            >
 
                 <Card.Img
                     className="imageStyle"
@@ -16,22 +18,41 @@ const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
 
                     <Card.Title style={titleStyle}>{itemTitle}</Card.Title>
 
-                    <hr style={hrStyle} />
 
-                    <Card.Text style={descStyle} className="text-muted">
-                        {itemDesc}
+
+
+
+
+                    <Card.Text >
+                        <Row>
+                            <Col xs={3}>
+                                <label style={priceStyle}>  ฿400</label>
+                            </Col>
+
+                        </Row>
+                        <Row>
+                            <Col xs={3}>
+                                <AiOutlineHeart />
+                            </Col>
+                            <Col style={{ textAlign: 'right' }}>
+                                <label>
+                                    <AiFillStar style={starStyle} size={13} />
+                                    <AiFillStar style={starStyle} size={13} />
+                                    <AiFillStar style={starStyle} size={13} />
+                                    <AiFillStar style={starStyle} size={13} />
+                                    <AiFillStar style={starStyle} size={13} />
+                                </label>
+                                <label> &nbsp;</label>
+                                <label style={soldAmountStyle}>   ขายแล้ว 5000 ชิ้น</label>
+                            </Col>
+                        </Row>
+                        <Row>
+
+                            <Col style={addressStyle}>
+                                หมู่บ้านโคโนฮะ
+                            </Col>
+                        </Row>
                     </Card.Text>
-
-                    <Card.Text style={descStyle} className="text-muted">
-                        <label style={itemStock <= 0 ? { color: 'salmon' } : {}}>
-                            In Stock: {itemStock}
-                        </label>
-                    </Card.Text>
-
-                    <Button
-                        variant={itemStock > 0 ? "outline-primary" : 'outline-secondary'}
-                        disabled={itemStock <= 0 ? true : false}
-                        style={buyButtonStyle}>Buy</Button>
 
                 </Card.Body>
 
@@ -40,8 +61,31 @@ const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
     )
 }
 
+const priceStyle = {
+    color: 'rgb(238,77,45)',
+    fontWeight: '500',
+    fontSize: 18,
+    backgroundColor: '#FAFAFA',
+
+}
+const starStyle = {
+    color: '#FFCE3D',
+
+}
+const soldAmountStyle = {
+    color: 'grey',
+    fontSize: 12
+}
+const addressStyle = {
+    color: 'grey',
+    fontSize: 12,
+    textAlign: 'right'
+
+}
+
 const titleStyle = {
-    marginBottom: 1
+    marginBottom: 35,
+    fontSize: 18
 }
 
 const descStyle = {

@@ -78,9 +78,7 @@ const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
                                                     variant={chooseItem == i ? "info" : 'outline-secondary'}
                                                     key={i}
                                                 >{item}</Button>
-                                            )
-                                            )
-                                            }
+                                            ))}
 
 
                                         </div>
@@ -123,8 +121,14 @@ const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
                                 </Row>
                             </Card.Text>
                             <Card.Text style={descStyle, { marginTop: 20 }} className="text-muted">
-                                <Button variant='outline-danger' style={{ marginRight: 10 }}>เพิ่มไปยังตะกร้า</Button>
-                                <Button variant='danger'>ซื้อสินค้า</Button>
+                                <Row>
+                                    <Col xs="3">
+                                        <Button variant='outline-danger' style={{ marginRight: 10 }}>เพิ่มไปยังตะกร้า</Button>
+                                    </Col>
+                                    <Col>
+                                        <Button variant='danger'>ซื้อสินค้า</Button>
+                                    </Col>
+                                </Row>
                             </Card.Text>
 
                             <Card.Text style={descStyle} className="text-muted">
