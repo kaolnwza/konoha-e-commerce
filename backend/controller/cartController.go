@@ -3,7 +3,6 @@ package controller
 import (
 	"konoha-e-commerce/model"
 	"konoha-e-commerce/services"
-	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -15,9 +14,6 @@ func CreateCart(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
-
-	cart.CreateTime = time.Now()
-	cart.CartStatus = "uncomplete"
 
 	_, err = services.CreateCartService(cart)
 	if err != nil {
@@ -53,4 +49,39 @@ func GetCartByUserId(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(res_cart)
+}
+
+func ModifyCartAmountById(c *fiber.Ctx) error {
+	var req_cart model.Cart
+
+	err := c.BodyParser(&req_cart)
+	if err != nil {
+		c.Status(400).JSON(err.Error())
+	}
+
+	cart_id := req_cart.Id
+	modify_amount := req_cart.ProductAmount
+	response, err := services.ModifyCartAmountByIdService(cart_id, modify_amount)
+	if err != nil {
+		c.Status(400).JSON(err.Error())
+	}
+
+	return c.Status(200).JSON(response)
+}
+
+func DeleteCartById(c *fiber.Ctx) error {
+	var req_cart model.Cart
+
+	err := c.BodyParser(&req_cart)
+	if err != nil {
+		c.Status(400).JSON(err.Error())
+	}
+
+	cart_id := req_cart.Id
+	response, err := services.DeleteCartByIdService(cart_id)
+	if err != nil {
+		c.Status(400).JSON(err.Error())
+	}
+
+	return c.Status(200).JSON(response)
 }

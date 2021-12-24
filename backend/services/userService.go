@@ -7,18 +7,19 @@ import (
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 //insert to collection 'user'
-func CreateUserService(user model.User) (model.User, error) {
+func CreateUserService(user model.User) (*mongo.InsertOneResult, error) {
 	user.CreateTime = time.Now()
 
-	_, err := repository.CreateUserRepo(user)
+	res, err := repository.CreateUserRepo(user)
 	if err != nil {
-		return model.User{}, err
+		return nil, err
 	}
 
-	return user, nil
+	return res, nil
 
 }
 

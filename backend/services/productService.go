@@ -7,17 +7,18 @@ import (
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func CreateProductService(product model.Product) (model.Product, error) {
+func CreateProductService(product model.Product) (*mongo.InsertOneResult, error) {
 	product.CreateTime = time.Now()
 
-	_, err := repository.CreateProductRepo(product)
+	res, err := repository.CreateProductRepo(product)
 	if err != nil {
-		return model.Product{}, err
+		return nil, err
 	}
 
-	return product, nil
+	return res, nil
 }
 
 //get all product

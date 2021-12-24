@@ -14,4 +14,7 @@ func SetupRoutes(app *fiber.App) {
 	cart_route := app.Group("/cart")
 	CartRoutes(cart_route)
 
+	transaction_route := app.Group("/transaction")
+	TransactionRoutes(transaction_route)
+
 }
