@@ -10,6 +10,8 @@ func SetupRoutes(app *fiber.App) {
 
 	product_route := app.Group("/product")
 	ProductRoutes(product_route)
-	// Setup note routes, can use same syntax to add routes for more models
+
+	cart_route := app.Group("/cart")
+	CartRoutes(cart_route)
 
 }
