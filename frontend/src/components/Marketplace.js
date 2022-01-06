@@ -1,15 +1,92 @@
-import { Col, Row, Card } from 'react-bootstrap'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { Col, Row, Card, Button, Form } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import ItemComp from './ItemComp'
 import LoginModal from './LoginModal'
 
 const Marketplace = () => {
+    const [product, setProduct] = useState([])
+    const [type, setType] = useState('all')
+
+    useEffect(() => {
+        GetAllProduct()
+    }, [])
+
+    const GetAllProduct = async () => {
+        await axios.get("product/getall")
+            .then(res => setProduct(res.data))
+    }
+
+    const filterSome = (type) => {
+        var filterProduct = product
+        if (type != 'all') {
+            filterProduct = product.filter(x => x.product_type == type)
+        }
+
+        return (
+            filterProduct.map((item, i) => (
+                <Col md={3} key={i}>
+                    <div>
+                        <Link to={"/product/" + item._id} style={{ textDecoration: 'none', color: 'black' }}>
+                            <ItemComp
+                                itemTitle={item.product_name}
+                                itemDesc={item.product_description}
+                                itemImg={item.product_image}
+                                itemSold={item.product_sold_amount}
+
+
+                            />
+                        </Link>
+                    </div>
+                </Col>
+            ))
+        )
+    }
+
+    const dataList = product.map((item, i) => (
+        <Col md={3} key={i}>
+            <div>
+                <Link to={"/product/" + item._id} style={{ textDecoration: 'none', color: 'black' }}>
+                    <ItemComp
+                        itemTitle={item.product_name}
+                        itemDesc={item.product_description}
+                        itemImg={item.product_image}
+                        itemSold={item.product_sold_amount}
+
+
+                    />
+                </Link>
+            </div>
+        </Col>
+    ))
+
+
     return (
         <div>
             <Card style={{ marginTop: 30, paddingTop: 10, paddingLeft: 10, paddingRight: 10 }}>
                 <Card.Body >
+                    {/* <Button onClick={() => setType('all')}>All</Button>
+                    <Button onClick={() => setType('pet')}>Pet</Button>
+                    <Button onClick={() => setType('weapon')}>Weapon</Button> */}
+
+                    <Form className="mb-3">
+                        <Form.Control
+                            as="select"
+                            style={{ width: '30%', fontWeight: 'bold' }}
+                            onChange={e => setType(e.target.value)}
+                        >
+                            <option value="all">All</option>
+                            <option value="weapon">Weapon</option>
+                            <option value="clothes">Clothes</option>
+                            <option value="phone">Phone</option>
+                            <option value="pet">Pet</option>
+
+                        </Form.Control>
+                    </Form>
                     <Row >
-                        <LoginModal />
-                        {dataList}
+
+                        {filterSome(type)}
                     </Row>
                 </Card.Body>
             </Card>
@@ -52,20 +129,6 @@ const Data = [
     }
 ]
 
-const dataList = Data.map((item, i) => (
-    <Col md={3} >
-        <div onClick={() => alert(item.title)}>
-            <ItemComp
-                itemTitle={item.title}
-                itemDesc={item.desc}
-                itemImg={item.img}
-                itemStock={item.stock}
-                key={i}
-
-            />
-        </div >
-    </Col>
-))
 
 
 

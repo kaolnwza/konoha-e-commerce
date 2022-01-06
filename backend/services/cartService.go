@@ -4,6 +4,7 @@ import (
 	"context"
 	"konoha-e-commerce/model"
 	"konoha-e-commerce/repository"
+	"konoha-e-commerce/util"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -32,12 +33,14 @@ func GetAllCartService(cart []model.Cart) ([]model.Cart, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return cart, nil
 }
 
-func GetCartByUserIdService(user_id primitive.ObjectID) ([]model.Cart, error) {
-	var cart []model.Cart
+func GetCartByUserIdService(id string) ([]model.CartWithProduct, error) {
+	var cart []model.CartWithProduct
 
+	user_id, _ := primitive.ObjectIDFromHex(id)
 	cursor, err := repository.GetCartByUserIdRepo(user_id)
 	if err != nil {
 		return nil, err
@@ -47,6 +50,14 @@ func GetCartByUserIdService(user_id primitive.ObjectID) ([]model.Cart, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	//let merge cart and product
+	var product []model.Product
+	product, _ = GetAllProductService(product)
+
+	cart = util.MergeCartAndProduct(cart, product)
+
+	cart = util.ConfigOverAmount(cart)
 
 	return cart, nil
 }
@@ -61,8 +72,8 @@ func ModifyCartAmountByIdService(cart_id primitive.ObjectID, modify_amount int) 
 	return res, nil
 }
 
-func DeleteCartByIdService(cart_id primitive.ObjectID) (*mongo.DeleteResult, error) {
-
+func DeleteCartByIdService(id string) (*mongo.DeleteResult, error) {
+	cart_id, _ := primitive.ObjectIDFromHex(id)
 	res, err := repository.DeleteCartByIdRepo(cart_id)
 	if err != nil {
 		return nil, err

@@ -26,7 +26,7 @@ func ModifyCartAmountByIdRepo(cart_id primitive.ObjectID, modify_amount int) (*m
 	return db.MongoDatabase.Collection("cart").UpdateOne(
 		context.Background(),
 		bson.M{"_id": cart_id},
-		bson.M{"$set": bson.M{"product_amount": modify_amount}})
+		bson.M{"$set": bson.M{"cart_product_amount": modify_amount}})
 }
 
 func DeleteCartByIdRepo(cart_id primitive.ObjectID) (*mongo.DeleteResult, error) {

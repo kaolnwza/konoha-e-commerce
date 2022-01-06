@@ -12,9 +12,9 @@ func CartRoutes(router fiber.Router) {
 
 	router.Get("/getall", controller.GetAllCart)
 
-	router.Get("/getbyuserid", controller.GetCartByUserId)
+	router.Get("/getbyuserid/:id", controller.GetCartByUserId)
 
 	router.Put("/modifyamountbyid", controller.ModifyCartAmountById)
 
-	router.Delete("/deletebyid", controller.DeleteCartById)
+	router.Delete("/deletebyid/:id", controller.DeleteCartById)
 }

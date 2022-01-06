@@ -19,4 +19,5 @@ type User struct {
 	Password   string             `json:"password" bson:"password"`
 	CreateTime time.Time          `json:"create_time" bson:"create_time"`
 	StoreName  string             `json:"store_name" bson:"store_name"`
+	Image      string             `json:"image" bson:"image"`
 }

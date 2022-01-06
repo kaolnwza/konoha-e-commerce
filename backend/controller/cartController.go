@@ -35,14 +35,8 @@ func GetAllCart(c *fiber.Ctx) error {
 }
 
 func GetCartByUserId(c *fiber.Ctx) error {
-	var req_cart model.Cart
+	user_id := c.Params("id")
 
-	err := c.BodyParser(&req_cart)
-	if err != nil {
-		return c.Status(400).JSON(err.Error())
-	}
-
-	user_id := req_cart.UserId
 	res_cart, err := services.GetCartByUserIdService(user_id)
 	if err != nil {
 		return c.Status(400).JSON(err.Error())
@@ -60,7 +54,7 @@ func ModifyCartAmountById(c *fiber.Ctx) error {
 	}
 
 	cart_id := req_cart.Id
-	modify_amount := req_cart.ProductAmount
+	modify_amount := req_cart.CartProductAmount
 	response, err := services.ModifyCartAmountByIdService(cart_id, modify_amount)
 	if err != nil {
 		c.Status(400).JSON(err.Error())
@@ -70,14 +64,7 @@ func ModifyCartAmountById(c *fiber.Ctx) error {
 }
 
 func DeleteCartById(c *fiber.Ctx) error {
-	var req_cart model.Cart
-
-	err := c.BodyParser(&req_cart)
-	if err != nil {
-		c.Status(400).JSON(err.Error())
-	}
-
-	cart_id := req_cart.Id
+	cart_id := c.Params("id")
 	response, err := services.DeleteCartByIdService(cart_id)
 	if err != nil {
 		c.Status(400).JSON(err.Error())

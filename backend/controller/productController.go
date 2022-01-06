@@ -37,18 +37,50 @@ func GetAllProduct(c *fiber.Ctx) error {
 
 // get product by _id
 func GetProductById(c *fiber.Ctx) error {
-	var req_product model.Product
+	product_id := c.Params("id")
 
-	err := c.BodyParser(&req_product)
-	if err != nil {
-		return c.Status(400).JSON(err.Error())
-	}
-
-	product_id := req_product.Id
 	res_product, err := services.GetProductByIdService(product_id)
 	if err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
 
 	return c.Status(200).JSON(res_product)
+}
+
+// get product by user_id
+func GetProductByUserId(c *fiber.Ctx) error {
+	user_id := c.Params("id")
+
+	res_product, err := services.GetProductByUserIdService(user_id)
+	if err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+
+	return c.Status(200).JSON(res_product)
+}
+
+func DeleteProductById(c *fiber.Ctx) error {
+	product_id := c.Params("id")
+	response, err := services.DeleteProductByIdService(product_id)
+	if err != nil {
+		c.Status(400).JSON(err.Error())
+	}
+
+	return c.Status(200).JSON(response)
+}
+
+func ModifyProductAmountById(c *fiber.Ctx) error {
+	var req_product model.Product
+
+	err := c.BodyParser(&req_product)
+	if err != nil {
+		c.Status(400).JSON(err.Error())
+	}
+
+	response, err := services.ModifyProductByIdService(req_product)
+	if err != nil {
+		c.Status(400).JSON(err.Error())
+	}
+
+	return c.Status(200).JSON(response)
 }

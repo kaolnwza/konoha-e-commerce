@@ -43,6 +43,10 @@
   object-fit: cover;
 }
 
+.imageObjectFit {
+  object-fit: cover;
+}
+
 .imageStyle_profile {
   height: 150px;
   width: 150px;

@@ -36,13 +36,54 @@ func GetAllProductService(product []model.Product) ([]model.Product, error) {
 }
 
 //get product by _id
-func GetProductByIdService(id primitive.ObjectID) (model.Product, error) {
+func GetProductByIdService(id string) (model.Product, error) {
 	var product model.Product
 
-	err := repository.GetProductByIdRepo(id).Decode(&product)
+	product_id, _ := primitive.ObjectIDFromHex(id)
+	err := repository.GetProductByIdRepo(product_id).Decode(&product)
+
 	if err != nil {
 		return model.Product{}, err
 	}
 
 	return product, nil
+}
+
+//get product by user_id
+func GetProductByUserIdService(id string) ([]model.Product, error) {
+	var product []model.Product
+
+	user_id, _ := primitive.ObjectIDFromHex(id)
+	cursor, err := repository.GetProductByUserIdRepo(user_id)
+	if err != nil {
+		return nil, err
+	}
+
+	err = cursor.All(context.Background(), &product)
+	if err != nil {
+		return nil, err
+	}
+
+	return product, nil
+}
+
+func DeleteProductByIdService(id string) (*mongo.DeleteResult, error) {
+	product_id, _ := primitive.ObjectIDFromHex(id)
+	res, err := repository.DeleteProductByIdRepo(product_id)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}
+
+func ModifyProductByIdService(product model.Product) (*mongo.UpdateResult, error) {
+
+	res, err := repository.ModifyProductByIdRepo(product)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }

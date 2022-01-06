@@ -9,9 +9,9 @@ import (
 type Product struct {
 	Id                 primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	Seller             primitive.ObjectID `json:"seller" bson:"seller"`
-	ProductName        string             `json:"product_name" bson:"product_name:"`
+	ProductName        string             `json:"product_name" bson:"product_name"`
 	ProductType        string             `json:"product_type" bson:"product_type"`
-	ProductPrice       string             `json:"product_price" bson:"product_price"`
+	ProductPrice       int                `json:"product_price" bson:"product_price"`
 	ProductAmount      int                `json:"product_amount" bson:"product_amount"`
 	ProductOption      []string           `json:"product_option" bson:"product_option"`
 	ProductImage       string             `json:"product_image" bson:"product_image"`

@@ -7,12 +7,24 @@ import (
 )
 
 type Cart struct {
-	Id            primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	UserId        primitive.ObjectID `json:"user_id" bson:"user_id"`
-	ProductId     primitive.ObjectID `json:"product_id" bson:"product_id"`
-	ProductAmount int                `json:"product_amount" bson:"product_amount"`
-	CreateTime    time.Time          `json:"create_time" bson:"create_time"`
-	CartStatus    string             `json:"cart_status" bson:"cart_status"`
+	Id                primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
+	UserId            primitive.ObjectID `json:"user_id" bson:"user_id"`
+	ProductId         primitive.ObjectID `json:"product_id" bson:"product_id"`
+	CartProductAmount int                `json:"cart_product_amount" bson:"cart_product_amount"`
+	CreateTime        time.Time          `json:"create_time" bson:"create_time"`
+	CartStatus        string             `json:"cart_status" bson:"cart_status"`
+	PickedOption      string             `json:"picked_option" bson:"picked_option"`
+}
+
+type CartWithProduct struct {
+	Id        primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
+	UserId    primitive.ObjectID `json:"user_id" bson:"user_id"`
+	ProductId primitive.ObjectID `json:"product_id" bson:"product_id"`
+	Product
+	CartProductAmount int       `json:"cart_product_amount" bson:"cart_product_amount"`
+	CreateTime        time.Time `json:"create_time" bson:"create_time"`
+	CartStatus        string    `json:"cart_status" bson:"cart_status"`
+	PickedOption      string    `json:"picked_option" bson:"picked_option"`
 }
 
 // type Order struct {

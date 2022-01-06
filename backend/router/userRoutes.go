@@ -12,9 +12,13 @@ func UserRoutes(router fiber.Router) {
 	//get all user
 	router.Get("/getall", controller.GetAllUser)
 	//get user by _id
-	router.Get("/getbyid", controller.GetUserById)
+	router.Get("/getbyid/:id", controller.GetUserById)
 	//get user by username
-	router.Get("/getbyusername", controller.GetUserByUsername)
+	router.Get("/getbyusername/:username", controller.GetUserByUsername)
 	//get user by store name
-	router.Get("/getbystorename", controller.GetUserByStoreName)
+	router.Get("/getbystorename/:storename", controller.GetUserByStoreName)
+	//delete all user
+	router.Delete("/deletealluser", controller.DeleteAllUser)
+	//edit user
+	router.Put("/modifyuser", controller.ModifyUserById)
 }

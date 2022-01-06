@@ -1,7 +1,7 @@
-import { Card, Button, Row, Col } from 'react-bootstrap'
+import { Card, Row, Col } from 'react-bootstrap'
 import '../App.css'
 import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
-const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
+const ItemComp = ({ itemTitle, itemImg }) => {
     return (
         <div className="itemHover">
 
@@ -17,12 +17,6 @@ const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
                 <Card.Body style={cardBodyStyle}>
 
                     <Card.Title style={titleStyle}>{itemTitle}</Card.Title>
-
-
-
-
-
-
                     <Card.Text >
                         <Row>
                             <Col xs={3}>
@@ -30,7 +24,7 @@ const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
                             </Col>
 
                         </Row>
-                        <Row>
+                        {/* <Row>
                             <Col xs={3}>
                                 <AiOutlineHeart />
                             </Col>
@@ -51,7 +45,7 @@ const ItemComp = ({ itemTitle, itemDesc, itemImg, itemStock }) => {
                             <Col style={addressStyle}>
                                 หมู่บ้านโคโนฮะ
                             </Col>
-                        </Row>
+                        </Row> */}
                     </Card.Text>
 
                 </Card.Body>
@@ -86,25 +80,6 @@ const addressStyle = {
 const titleStyle = {
     marginBottom: 35,
     fontSize: 18
-}
-
-const descStyle = {
-    fontSize: 15,
-    paddingLeft: 3,
-    marginBottom: 0
-}
-
-const buyButtonStyle = {
-    fontSize: 15,
-    marginTop: 10,
-    paddingTop: 3,
-    paddingBotton: 3,
-    marginBottom: 6
-}
-
-const hrStyle = {
-    marginTop: 6,
-    marginBottom: 8
 }
 
 const cardBodyStyle = {

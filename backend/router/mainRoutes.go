@@ -17,4 +17,10 @@ func SetupRoutes(app *fiber.App) {
 	transaction_route := app.Group("/transaction")
 	TransactionRoutes(transaction_route)
 
+	auth_route := app.Group("/auth")
+	AuthRoutes(auth_route)
+
+	review_route := app.Group("/review")
+	ReviewRoute(review_route)
+
 }

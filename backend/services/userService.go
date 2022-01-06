@@ -4,6 +4,7 @@ import (
 	"context"
 	"konoha-e-commerce/model"
 	"konoha-e-commerce/repository"
+	"konoha-e-commerce/util"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -13,6 +14,12 @@ import (
 //insert to collection 'user'
 func CreateUserService(user model.User) (*mongo.InsertOneResult, error) {
 	user.CreateTime = time.Now()
+
+	generatedPassword, err := util.GeneratePassword(user.Password)
+	if err != nil {
+		return nil, err
+	}
+	user.Password = generatedPassword
 
 	res, err := repository.CreateUserRepo(user)
 	if err != nil {
@@ -38,10 +45,11 @@ func GetAllUserService(user []model.User) ([]model.User, error) {
 }
 
 //get user by _id
-func GetUserByIdService(id primitive.ObjectID) (model.User, error) {
+func GetUserByIdService(id string) (model.User, error) {
 	var user model.User
 
-	err := repository.GetUserByIdRepo(id).Decode(&user)
+	user_id, _ := primitive.ObjectIDFromHex(id)
+	err := repository.GetUserByIdRepo(user_id).Decode(&user)
 	if err != nil {
 		return model.User{}, err
 	}
@@ -71,4 +79,23 @@ func GetUserByStoreNameService(store_name string) (model.User, error) {
 	}
 
 	return user, nil
+}
+
+func DeleteAllUserService() (*mongo.DeleteResult, error) {
+	result, err := repository.DeleteAllUserRepo()
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
+func ModifyUserByIdService(user model.User) (*mongo.UpdateResult, error) {
+
+	res, err := repository.ModifyUserByIdRepo(user)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }

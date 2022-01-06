@@ -40,14 +40,8 @@ func GetAllUser(c *fiber.Ctx) error {
 
 // get user by _id
 func GetUserById(c *fiber.Ctx) error {
-	var req_user model.User
+	user_id := c.Params("id")
 
-	err := c.BodyParser(&req_user)
-	if err != nil {
-		return c.Status(400).JSON(err.Error())
-	}
-
-	user_id := req_user.Id
 	res_user, err := services.GetUserByIdService(user_id)
 	if err != nil {
 		return c.Status(400).JSON(err.Error())
@@ -58,15 +52,9 @@ func GetUserById(c *fiber.Ctx) error {
 
 // get user by _id
 func GetUserByUsername(c *fiber.Ctx) error {
-	var req_user model.User
+	username := c.Params("username")
 
-	err := c.BodyParser(&req_user)
-	if err != nil {
-		return c.Status(400).JSON(err.Error())
-	}
-
-	user_username := req_user.Username
-	res_user, err := services.GetUserByUsernameService(user_username)
+	res_user, err := services.GetUserByUsernameService(username)
 	if err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
@@ -76,18 +64,38 @@ func GetUserByUsername(c *fiber.Ctx) error {
 
 // get user by _id
 func GetUserByStoreName(c *fiber.Ctx) error {
-	var req_user model.User
+	store_name := c.Params("storename")
 
-	err := c.BodyParser(&req_user)
-	if err != nil {
-		return c.Status(400).JSON(err.Error())
-	}
-
-	user_store_name := req_user.StoreName
-	res_user, err := services.GetUserByStoreNameService(user_store_name)
+	res_user, err := services.GetUserByStoreNameService(store_name)
 	if err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
 
 	return c.Status(200).JSON(res_user)
+}
+
+func DeleteAllUser(c *fiber.Ctx) error {
+
+	res, err := services.DeleteAllUserService()
+	if err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+
+	return c.Status(200).JSON(res)
+}
+
+func ModifyUserById(c *fiber.Ctx) error {
+	var req_user model.User
+
+	err := c.BodyParser(&req_user)
+	if err != nil {
+		c.Status(400).JSON(err.Error())
+	}
+
+	response, err := services.ModifyUserByIdService(req_user)
+	if err != nil {
+		c.Status(400).JSON(err.Error())
+	}
+
+	return c.Status(200).JSON(response)
 }
