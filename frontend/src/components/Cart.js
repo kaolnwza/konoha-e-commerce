@@ -98,6 +98,98 @@ const Cart = () => {
 
     }
 
+    const MakeDiv = () => {
+        if (cart !== null ) {
+            return (
+        
+        cart.map((item, i) => (
+            <Card style={{}} className="" key={i}>
+                <Row>
+                    <Col md={3} >
+                        <div style={{ padding: 10 }}>
+                            <Image src={item.product_image}
+                                style={imageStyle}
+                                className="imageObjectFit"
+                                rounded
+                            />
+
+                        </div>
+                    </Col>
+                    <Col>
+                        <Row className="mt-4">
+                            <Col md={3}>
+                                <span style={spanStyleLeft}>Product Name</span>
+                            </Col>
+                            <Col>
+                                <span style={spanStyleRight} className='text-secondary'>{item.product_name}</span>
+
+                            </Col>
+
+                        </Row>
+                        <Col>
+                            <hr style={hrStyle} />
+                        </Col>
+                        <Row>
+                            <Col md={3}>
+                                <span style={spanStyleLeft}>Product Amount</span>
+                            </Col>
+
+                            <Col md={3}>
+                                <Button
+                                    style={{ fontSize: 15 }}
+                                    variant={'outline-secondary'}
+                                    onClick={() => {
+                                        if (item.cart_product_amount > 1)
+                                            ModifyCartProduct(item._id, item.cart_product_amount - 1)
+                                        GetCartInfo()
+                                    }}
+
+                                >-</Button>
+
+                                <Button
+                                    style={{ fontSize: 15 }}
+                                    variant={'outline-secondary'}
+                                >{item.cart_product_amount}</Button>
+
+                                <Button
+                                    variant={'outline-secondary'}
+                                    style={{ fontSize: 15 }}
+                                    onClick={() => {
+
+                                        if (item.cart_product_amount < item.product_amount) {
+                                            ModifyCartProduct(item._id, item.cart_product_amount + 1)
+                                            GetCartInfo()
+                                        }
+
+
+                                    }}
+                                >+</Button>
+                            </Col>
+
+                        </Row>
+                        <Col>
+                            <hr style={hrStyle} />
+                        </Col>
+                        <Row>
+                            <Col style={{ marginLeft: 30 }} md={1}>
+                                <Button variant="outline-danger" onClick={() => DeleteCart(item._id)}>Delete</Button>
+
+                            </Col>
+                            <Col style={{ marginLeft: 10, marginTop: 2 }}> <input type="checkbox" style={checkboxStyle} onClick={() => toggleCheck(i)} /></Col>
+
+
+                        </Row>
+                    </Col>
+                </Row>
+            </Card >
+
+        ))
+
+            )
+    }
+else {
+    return null
+}}
 
 
     return (
@@ -107,91 +199,9 @@ const Cart = () => {
                 style={{ marginLeft: 10, marginBottom: 10 }}
                 onClick={() => CheckoutCart()}>Check out</Button>
             {
-                cart.map((item, i) => (
-                    <Card style={{}} className="" key={i}>
-                        <Row>
-                            <Col md={3} >
-                                <div style={{ padding: 10 }}>
-                                    <Image src={item.product_image}
-                                        style={imageStyle}
-                                        className="imageObjectFit"
-                                        rounded
-                                    />
-
-                                </div>
-                            </Col>
-                            <Col>
-                                <Row className="mt-4">
-                                    <Col md={3}>
-                                        <span style={spanStyleLeft}>Product Name</span>
-                                    </Col>
-                                    <Col>
-                                        <span style={spanStyleRight} className='text-secondary'>{item.product_name}</span>
-
-                                    </Col>
-
-                                </Row>
-                                <Col>
-                                    <hr style={hrStyle} />
-                                </Col>
-                                <Row>
-                                    <Col md={3}>
-                                        <span style={spanStyleLeft}>Product Amount</span>
-                                    </Col>
-
-                                    <Col md={3}>
-                                        <Button
-                                            style={{ fontSize: 15 }}
-                                            variant={'outline-secondary'}
-                                            onClick={() => {
-                                                if (item.cart_product_amount > 1)
-                                                    ModifyCartProduct(item._id, item.cart_product_amount - 1)
-                                                GetCartInfo()
-                                            }}
-
-                                        >-</Button>
-
-                                        <Button
-                                            style={{ fontSize: 15 }}
-                                            variant={'outline-secondary'}
-                                        >{item.cart_product_amount}</Button>
-
-                                        <Button
-                                            variant={'outline-secondary'}
-                                            style={{ fontSize: 15 }}
-                                            onClick={() => {
-
-                                                if (item.cart_product_amount < item.product_amount) {
-                                                    ModifyCartProduct(item._id, item.cart_product_amount + 1)
-                                                    GetCartInfo()
-                                                }
-
-
-                                            }}
-                                        >+</Button>
-                                    </Col>
-
-                                </Row>
-                                <Col>
-                                    <hr style={hrStyle} />
-                                </Col>
-                                <Row>
-                                    <Col style={{ marginLeft: 30 }} md={1}>
-                                        <Button variant="outline-danger" onClick={() => DeleteCart(item._id)}>Delete</Button>
-
-                                    </Col>
-                                    <Col style={{ marginLeft: 10, marginTop: 2 }}> <input type="checkbox" style={checkboxStyle} onClick={() => toggleCheck(i)} /></Col>
-
-
-                                </Row>
-                            </Col>
-                        </Row>
-                    </Card >
-
-                ))
-
-
+                MakeDiv()
             }
+            
 
 
         </div >

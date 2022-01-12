@@ -17,8 +17,9 @@ const MyProduct = () => {
     const GetMyProduct = async () => {
         await axios.get("/product/getbyuserid/" + localStorage.getItem('user_id'))
             .then(res => {
+                console.log("kuy :" + res.data)
                 setProduct(res.data)
-                console.log(res.data)
+                
             })
     }
 
@@ -33,6 +34,7 @@ const MyProduct = () => {
                             itemImg={item.product_image}
                             itemSold={item.product_sold_amount}
                             itemId={item._id}
+                            itemPrice={item.product_price}
                             key={i}
 
                         />

@@ -34,6 +34,7 @@ const Marketplace = () => {
                                 itemDesc={item.product_description}
                                 itemImg={item.product_image}
                                 itemSold={item.product_sold_amount}
+                                itemPrice={item.product_price}
 
 
                             />

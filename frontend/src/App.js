@@ -34,11 +34,11 @@ function App() {
   const StoreCookie = async () => {
     await axios.get("auth/getcookie")
       .then(res => {
-        localStorage.setItem("user_id", res.data)
+        localStorage.setItem("token", res.data)
         console.log("object")
 
       })
-      .catch(() => localStorage.setItem("user_id", ''))
+      .catch(() => localStorage.setItem("token", ''))
 
   }
 

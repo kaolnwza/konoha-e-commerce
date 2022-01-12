@@ -24,7 +24,7 @@ func Login(c *fiber.Ctx) error {
 	//matching password
 	err = services.ComparePasswordService(req_user)
 	if err != nil {
-		return c.Status(401).JSON(err.Error())
+		return c.Status(400).JSON(err.Error())
 	}
 
 	//create cookie
@@ -41,7 +41,7 @@ func Logout(c *fiber.Ctx) error {
 	return nil
 }
 
-func GetCookie(c *fiber.Ctx) error {
+func GetExtractCookie(c *fiber.Ctx) error {
 
 	res_user, err := services.ExtractCookie(c)
 	if err != nil {
@@ -49,4 +49,8 @@ func GetCookie(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(res_user)
+}
+
+func GetCookie(c *fiber.Ctx) error {
+	return c.Status(200).JSON(services.GetTokenService(c))
 }

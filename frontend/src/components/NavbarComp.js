@@ -3,9 +3,19 @@ import LoginModal from './LoginModal'
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsCart2 } from "react-icons/bs";
+import axios from 'axios';
 
 const NavbarComp = () => {
     const [modalShow, setModalShow] = React.useState(false);
+
+    const Signout = async () => {
+        await axios.delete("/auth/logout")
+        .then(res => {
+            if (res.status === 200) {
+            alert("Logout success")
+            window.location.reload()
+        }})
+    }
 
     return (
         <Navbar bg="light" expand="lg" >
@@ -17,7 +27,7 @@ const NavbarComp = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        {localStorage.getItem('user_id') != '' ?
+                        {localStorage.getItem('token') !== '' ?
                             <>
                                 <Nav.Link href="/userprofile">Profile</Nav.Link>
                                 <Nav.Link href="/myproduct">My Product</Nav.Link>
@@ -28,7 +38,7 @@ const NavbarComp = () => {
                     </Nav>
 
                     <Nav>
-                        {localStorage.getItem('user_id') == '' ?
+                        {localStorage.getItem('token') === '' ?
                             <>
                                 <Link to={'/login'}>
                                     <Button
@@ -41,11 +51,14 @@ const NavbarComp = () => {
 
 
                             :
+                            <>
                             <Link to="/cart">
-                                <BsCart2 size={25} style={{ color: "grey" }} />
+                                <BsCart2 size={25} style={{ color: "grey", marginRight: 20 }} />
                             </Link>
-
-
+              
+                           <Button variant="outline-primary" onClick={() => Signout()}>Logout</Button>
+                    
+                        </>
 
 
 

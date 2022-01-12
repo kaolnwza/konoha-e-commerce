@@ -42,6 +42,10 @@ func RemoveToken(c *fiber.Ctx) {
 	c.Cookie(&cookie)
 }
 
+func GetToken(c *fiber.Ctx) string {
+	return c.Cookies("jwt")
+}
+
 func ExtractToken(c *fiber.Ctx) (*jwt.StandardClaims, error) {
 	cookie := c.Cookies("jwt")
 

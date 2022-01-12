@@ -2,11 +2,14 @@ package router
 
 import (
 	"konoha-e-commerce/controller"
+	"konoha-e-commerce/services"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func CartRoutes(router fiber.Router) {
+
+	router.Use(services.AuthorizationRequired())
 	//add user router
 	router.Post("/add", controller.CreateCart)
 
