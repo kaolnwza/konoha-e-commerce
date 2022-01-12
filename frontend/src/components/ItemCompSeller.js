@@ -3,7 +3,7 @@ import '../App.css'
 import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-const ItemCompSeller = ({ itemTitle, itemImg, itemId }) => {
+const ItemCompSeller = ({ itemTitle, itemImg, itemId , itemPrice}) => {
 
     const DeleteProduct = async () => {
         await axios.delete("/product/deletebyid/" + itemId)
@@ -28,7 +28,7 @@ const ItemCompSeller = ({ itemTitle, itemImg, itemId }) => {
                     <Card.Text >
                         <Row>
                             <Col xs={3}>
-                                <label style={priceStyle}>  ฿{}</label>
+                                <label style={priceStyle}>  ฿{itemPrice}</label>
                             </Col>
 
                         </Row>

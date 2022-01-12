@@ -12,5 +12,7 @@ func AuthRoutes(router fiber.Router) {
 
 	router.Delete("/logout", controller.Logout)
 
+	router.Get("/getextractcookie", controller.GetExtractCookie)
+
 	router.Get("/getcookie", controller.GetCookie)
 }

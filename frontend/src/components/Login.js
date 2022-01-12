@@ -12,17 +12,27 @@ const Login = () => {
             password: password
         }
         await axios.post("http://localhost:8080/auth/login", data)
-            .then(res => StoreCookie())
+            .then(res => 
+                {
+                    StoreCookie()
+                    StoreUserCookie()
+                })
 
         //.then(res => console.log("za"))
     }
 
+    const StoreUserCookie = async () => {
+        await axios.get("auth/getextractcookie")
+            .then(res => {
+                localStorage.setItem("user_id", res.data)
+                window.location.href = "/"
+            })
+
+    }
     const StoreCookie = async () => {
         await axios.get("auth/getcookie")
             .then(res => {
-                localStorage.setItem("user_id", res.data)
-                console.log("object")
-                window.location.href = "/"
+                localStorage.setItem("token", res.data)
             })
 
     }

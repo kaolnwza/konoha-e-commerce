@@ -35,7 +35,10 @@ func GetAllCart(c *fiber.Ctx) error {
 }
 
 func GetCartByUserId(c *fiber.Ctx) error {
-	user_id := c.Params("id")
+	user_id, err := services.ExtractCookie(c)
+	if err != nil {
+		return c.Status(500).JSON(err.Error())
+	}
 
 	res_cart, err := services.GetCartByUserIdService(user_id)
 	if err != nil {

@@ -95,7 +95,7 @@ const Product = () => {
                         <Col>
                             <Card.Title style={titleStyle}>{product.product_name}</Card.Title>
                             <Card.Text style={descStyle} className="text-muted">
-                                {/* <label style={{ color: 'rgb(238,77,45)' }}>
+                                <label style={{ color: 'rgb(238,77,45)' }}>
                                     4.8 <AiFillStar />
                                 </label>
                                 <label style={ratingTopStyle} >
@@ -103,7 +103,7 @@ const Product = () => {
                                 </label>
                                 <label>
                                     5900 ขายแล้ว
-                                </label> */}
+                                </label>
                             </Card.Text>
                             <hr style={hrStyle} />
 
@@ -195,11 +195,11 @@ const Product = () => {
                                 </Row>
                             </Card.Text>
 
-                            {/* <Card.Text style={descStyle} className="text-muted">
+                            <Card.Text style={descStyle} className="text-muted">
                                 <div>
                                     <AiOutlineHeart size={20} /> Favorite
                                 </div>
-                            </Card.Text> */}
+                            </Card.Text>
 
                         </Col>
                     </Row>
