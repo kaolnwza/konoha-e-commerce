@@ -1,7 +1,7 @@
 import { Card, Row, Col } from 'react-bootstrap'
 import '../App.css'
 import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
-const ItemComp = ({ itemTitle, itemImg }) => {
+const ItemComp = ({ itemTitle, itemImg , itemPrice}) => {
     return (
         <div className="itemHover">
 
@@ -20,11 +20,11 @@ const ItemComp = ({ itemTitle, itemImg }) => {
                     <Card.Text >
                         <Row>
                             <Col xs={3}>
-                                <label style={priceStyle}>  ฿400</label>
+                                <label style={priceStyle}>  ฿{itemPrice}</label>
                             </Col>
 
                         </Row>
-                        {/* <Row>
+                        <Row>
                             <Col xs={3}>
                                 <AiOutlineHeart />
                             </Col>
@@ -45,7 +45,7 @@ const ItemComp = ({ itemTitle, itemImg }) => {
                             <Col style={addressStyle}>
                                 หมู่บ้านโคโนฮะ
                             </Col>
-                        </Row> */}
+                        </Row>
                     </Card.Text>
 
                 </Card.Body>

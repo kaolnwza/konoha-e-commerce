@@ -73,7 +73,9 @@ const UserProfile = () => {
 
 
     const TransactionList = () => {
+        if (transaction.length > 0){
         var time
+
 
         return transaction.map((x, i) => {
 
@@ -121,8 +123,13 @@ const UserProfile = () => {
         }
         );
     }
+    else {
+        return null
+    }
+    }
 
     const TransactionListSeller = () => {
+        if (transaction.length > 0){
         return transaction.map((x, i) => {
             if (x.transaction_status == chooseType.toLocaleLowerCase()) {
                 var product = x.product
@@ -158,6 +165,8 @@ const UserProfile = () => {
             }
         }
         );
+    }
+    return null
     }
 
     return (

@@ -2,11 +2,13 @@ package router
 
 import (
 	"konoha-e-commerce/controller"
+	"konoha-e-commerce/services"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func TransactionRoutes(router fiber.Router) {
+	router.Use(services.AuthorizationRequired())
 	//add transaction to database
 	router.Post("/add", controller.CreateTransaction)
 

@@ -6,6 +6,7 @@ import (
 	"konoha-e-commerce/util"
 
 	"github.com/gofiber/fiber/v2"
+	jwtware "github.com/gofiber/jwt/v3"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -78,6 +79,26 @@ func ExtractCookie(c *fiber.Ctx) (string, error) {
 
 }
 
+func GetTokenService(c *fiber.Ctx) string {
+	return util.GetToken(c)
+}
+
 func RemoveCookie(c *fiber.Ctx) {
 	util.RemoveToken(c)
+}
+
+func AuthorizationRequired() fiber.Handler {
+	return jwtware.New(jwtware.Config{
+		SigningKey: []byte(util.SecretKey),
+
+		ErrorHandler: ErrorAuth,
+	})
+}
+
+func ErrorAuth(c *fiber.Ctx, e error) error {
+	return c.Status(fiber.StatusUnauthorized).JSON("fail lol \n" + e.Error())
+}
+
+func SuccessAuth(c *fiber.Ctx) error {
+	return nil
 }
